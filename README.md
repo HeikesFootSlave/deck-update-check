@@ -3,7 +3,7 @@ This script checks to see if a SteamOS update has happened, and if so, it offers
 
 If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install.
 
-If the re-install is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run.
+If the re-install is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run (if not already present).
 
 If the re-install fails, it offers to open a log file that contains the output of `install_pacman_packages.sh`, so you can (hopefully) debug.
 
