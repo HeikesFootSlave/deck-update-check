@@ -1,3 +1,4 @@
 .last_steamos_release
 post_update.sh
 last_update.log
+packages-to-install

@@ -10,40 +10,46 @@
 
 # thanks to àngel "mussol" bosch - muzzol@gmail.com for https://gist.github.com/muzzol/f01fa6a3134d2ec90d3eb3e241bf541b, the original basis for this script
 
-PACKAGES="x11vnc conky"
+# get the path to this script
+DIR=$(dirname "$0");
+
+echo "$(date) - ${0}";
+
+# grab the package names from the list at ./packages-to-install, but only alphanumeric, "-", "_", "+", ".",  and "@"... throw away the rest (and replace /n with " ");
+PACKAGES=$(cat "${DIR}/packages-to-install" | grep -wo -E '([-A-Za-z0-9_@\.+])+' | tr '\n' ' ');
 
 # make sure we're root...
-echo -n "Checking permissions: "
+echo -n "Checking permissions:";
 if [[ "$(id -ru || true)" == "0" ]]; then
-    echo "OK"
+    echo "OK";
 else # exit 1 if not
     echo "ERROR!";
-    echo "this script must be executed by root"
-    echo "Ex: sudo $0"
-    exit 1
+    echo "this script must be executed by root";
+    echo "Ex: sudo $0";
+    exit 1;
 fi
 
 ## system related comands
-echo "Disabling readonly filesystem"
-steamos-readonly disable
+echo "Disabling readonly filesystem";
+steamos-readonly disable;
 
 # add a symlink so visudo will work (not that we actually need it now, since using kdesu)
 if [[ ! -f "/usr/bin/vi" ]]; then
     echo "creating symlink /usr/bin/vim -> /usr/bin/vi for visudo";
-    ln -s /usr/bin/vim /usr/bin/vi
+    ln -s /usr/bin/vim /usr/bin/vi;
 fi
 
 # set up the keyring if it doesn't exist already
 if [[ ! -e "/etc/pacman.d/gnupg/trustdb.gpg" ]]; then
-    echo "Initalizing pacman keys"
-    pacman-key --init
-    pacman-key --populate archlinux
+    echo "Initalizing pacman keys";
+    pacman-key --init;
+    pacman-key --populate archlinux;
 fi
 
-echo "Installing packages"
-pacman -Sy --noconfirm --overwrite '*' ${PACKAGES}
+echo "Installing packages";
+pacman -Sy --noconfirm --overwrite '*' ${PACKAGES};
 
-echo "Re-enabling readonly filesystem"
-steamos-readonly enable
+echo "Re-enabling readonly filesystem";
+steamos-readonly enable;
 
-echo "Done"
+echo "Done";
