@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # script for installing pacman packages on Steam Deck
 # ATENTION: USE IT AT YOUR OWN RISK!!!!

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # check if we're on a new SteamOS release, and if so, prompt to update installed pacman packages!
 
