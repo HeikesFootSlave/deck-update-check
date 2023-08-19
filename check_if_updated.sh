@@ -7,6 +7,8 @@ INSTALL_DIR=$(dirname "$0");
 PREVIOUS_OS_RELEASE=$(cat "${INSTALL_DIR}"/.last_steamos_release);
 CURRENT_OS_RELEASE=$(grep "ID" /etc/os-release);
 
+DECK_USER=$(grep "^User=" /etc/sddm.conf.d/steamos.conf | cut -d"=" -f2)
+
 if [[ "${PREVIOUS_OS_RELEASE}" = "${CURRENT_OS_RELEASE}" ]]; then
     echo "release ids unchanged, assuming no update. exiting.";
     exit 0;
@@ -36,9 +38,8 @@ else
 		fi;
 
 		# add an entry to ~/.config/autostart to run when KDE starts, if not already present
-		if [[ ! -f "/home/deck/.config/autostart/check_if_updated.sh.desktop" ]]; then
+		if [[ ! -f "/home/${DECK_USER}/.config/autostart/check_if_updated.sh.desktop" ]]; then
     		echo "installing autostart entry...";
-    		
     		{
 				echo '[Desktop Entry]';
 				echo 'Comment[en_US]=';
@@ -59,8 +60,7 @@ else
 				echo 'X-DBUS-StartupType=';
 				echo 'X-KDE-SubstituteUID=false';
 				echo 'X-KDE-Username=';
-			} >> /home/deck/.config/autostart/check_if_updated.sh.desktop
-
+			} >> /home/${DECK_USER}/.config/autostart/check_if_updated.sh.desktop
 		fi;
 
 		echo "Running pacman update...";
