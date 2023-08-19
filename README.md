@@ -20,8 +20,9 @@ the SteamOS release info is saved to `.last_steamos_release`.
 1. clone this repo.
 2. update `INSTALL_DIR` in `check_if_updated.sh` to the fully qualified path to which you cloned the repo.
 3. add the packages you want installed to $PACKAGES in `install_pacman_packages.sh`.
-4. add any post-update commands you want to `post_update.sh`.
-5. Add `check_if_updated.sh` to autostart. (open start menu, type 'autostart', click +add, browse to wherever you cloned this repo, click `check_if_updated.sh`)
+4. run `check_if_updated.sh` to verify functionality
+5. add any post-update commands you want to `post_update.sh`. (created on first run of `./check_if_updated.sh`, if not already present)
+6. Add `check_if_updated.sh` to autostart in KDE. (open start menu, type 'autostart', click +add, browse to wherever you cloned this repo, click `check_if_updated.sh`)
 
 
 #### Disclaimer:
