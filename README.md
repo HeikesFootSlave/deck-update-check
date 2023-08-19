@@ -14,7 +14,7 @@ The SteamOS release info is saved to `.last_steamos_release`.
 1. Clone this repo. (somewhere in /home/deck, or elsewhere that won't get overwritten by SteamOS updates)
 2. Add the package names you want to be installed to `packages-to-install`. (if you dont, this file will be created on first run, and populated with 'x11vnc conky')
 3. Execute `check_if_updated.sh` to add an entry for the script to KDE's autostart, install/update packages, and create `post_update.sh`.
-4. (Optional) Update `post_update.sh` to include any additional commands you want run after the packages are installed.
+4. *(Optional)* Update `post_update.sh` to include any additional commands you want run after the packages are re-installed.
 
 Once installed, it will check for SteamOS updates every time desktop mode is launched.
 
