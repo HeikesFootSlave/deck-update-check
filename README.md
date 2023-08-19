@@ -7,7 +7,7 @@ If the re-install is successful, it then runs `post_update.sh`. Add any commands
 
 If the re-install fails, it offers to open a log file that contains the output of `install_pacman_packages.sh`, so you can (hopefully) debug.
 
-The pacman update log from `install_pacman_packages.sh` is saved to `last_update.log`.
+The output from `install_pacman_packages.sh` is saved to `last_update.log`.
 The SteamOS release info is saved to `.last_steamos_release`.
 
 ### Installation:
