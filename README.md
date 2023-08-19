@@ -5,7 +5,7 @@ If accepted, It then prompts for a sudo password with [kdesu](https://api.kde.or
 
 If the update is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run.
 
-If the update fails, it offers to open a log file that contains the output of the `pacman -Sy --noconfirm --overwrite '*' ${PACKAGES}` command it tried to run, so you can hopefully debug.
+If the update fails, it offers to open a log file that contains the output of `./install_pacman_packages.sh`, so you can hopefully debug.
 
 The pacman update log is saved to `./last_update.log`.
 
