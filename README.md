@@ -1,5 +1,5 @@
 ## deck-update-check
-This script checks to see if a SteamOS update has happened, and if so, it offers (using a system notification modal from [notify-send](https://man.archlinux.org/man/notify-send.1.en)) to re-install previously specified pacman packages.
+This script checks to see if a SteamOS update has happened, and if so, it offers (using a system notification modal from [notify-send](https://man.archlinux.org/man/notify-send.1.en)) to re-install previously specified pacman packages. (listed in the file `packages-to-install`)
 
 If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install.
 
