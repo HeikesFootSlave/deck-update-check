@@ -35,20 +35,46 @@ else
     		echo "x11vnc conky" > "${INSTALL_DIR}/packages-to-install";
 		fi;
 
+		# add an entry to ~/.config/autostart to run when KDE starts, if not already present
+		if [[ ! -f "/home/deck/.config/autostart/check_if_updated.sh.desktop" ]]; then
+    		echo "installing autostart entry...";
+    		
+    		{
+				echo '[Desktop Entry]';
+				echo 'Comment[en_US]=';
+				echo 'Comment=';
+				echo "Exec=${INSTALL_DIR}/check_if_updated.sh";
+				echo 'GenericName[en_US]=Update pacman packages when a new SteamOS release is detected';
+				echo 'GenericName=Update pacman packages when a new SteamOS release is detected';
+				echo 'Icon=update-none';
+				echo 'MimeType=';
+				echo 'Name[en_US]=pacman update';
+				echo 'Name=pacman update';
+				echo 'Path=';
+				echo 'StartupNotify=true';
+				echo 'Terminal=false';
+				echo 'TerminalOptions=';
+				echo 'Type=Application';
+				echo 'X-DBUS-ServiceName=';
+				echo 'X-DBUS-StartupType=';
+				echo 'X-KDE-SubstituteUID=false';
+				echo 'X-KDE-Username=';
+			} >> /home/deck/.config/autostart/check_if_updated.sh.desktop
+
+		fi;
+
 		echo "Running pacman update...";
         
         # run the script that actually does the update
 		if kdesu -n -t -i 'update-high' "${INSTALL_DIR}/install_pacman_packages.sh" | tee ${INSTALL_DIR}/last_update.log; then
 			echo 'pacman update succeeded!';
-		    SUCCESS_NOTICE=$(notify-send -i emblem-success -a 'System Update' --action=LOG='View log file' "pacman update successful!")
-		    if [[ ${SUCCESS_NOTICE} == "LOG" ]]; then
-		    	konsole --hold -e "cat ${INSTALL_DIR}/last_update.log" &
-		    fi;
+		    notify-send -i emblem-success -a 'System Update' "pacman update successful!"
+
 		    # save current release info to a file so we can compare next time
 		    echo "${CURRENT_OS_RELEASE}" > "${INSTALL_DIR}"/.last_steamos_release;
 		    "${INSTALL_DIR}"/post_update.sh;
 		    exit 0;
-		else # yikes something went wrong
+		else # yikes, something went wrong
 			echo 'pacman update failed!';
 
 			# notify about the failure, and offer to open the log file
