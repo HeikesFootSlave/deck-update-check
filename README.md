@@ -5,7 +5,7 @@ If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.or
 
 If the re-install is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run.
 
-If the re-install fails, it offers to open a log file that contains the output of `install_pacman_packages.sh`, so you can hopefully debug.
+If the re-install fails, it offers to open a log file that contains the output of `install_pacman_packages.sh`, so you can (hopefully) debug.
 
 The pacman update log from `install_pacman_packages.sh` is saved to `last_update.log`.
 The SteamOS release info is saved to `.last_steamos_release`.
