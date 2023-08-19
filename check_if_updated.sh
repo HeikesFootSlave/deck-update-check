@@ -22,6 +22,12 @@ else
     		echo "[super-user-command]" > /home/deck/.config/kdesurc;
     		echo "super-user-command=sudo" >> /home/deck/.config/kdesurc;
 		fi
+
+		# create post_update.sh if it doesn't aready exist
+    	if [[ ! -f "${INSTALL_DIR}/post_update.sh" ]]; then
+    		echo "!#/bin/bash" > "${INSTALL_DIR}/post_update.sh";
+    		echo "#insert post-update commands here" >> "${INSTALL_DIR}/post_update.sh";
+		fi
         
         # run the script that actually does the update
 		if kdesu -n -t -i 'update-high' "${INSTALL_DIR}/install_pacman_packages.sh"; then
