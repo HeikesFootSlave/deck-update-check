@@ -67,7 +67,7 @@ else
 		echo "Running pacman update...";
         
         # run the script that actually does the update
-		if kdesu -n -t -i 'update-high' "${INSTALL_DIR}/install_pacman_packages.sh" | tee ${INSTALL_DIR}/last_update.log; then
+		if kdesu -t -i 'update-high' "${INSTALL_DIR}/install_pacman_packages.sh" > ${INSTALL_DIR}/last_update.log; then
 			echo 'pacman update succeeded!';
 		    notify-send -i emblem-success -a 'System Update' "pacman update successful!"
 
