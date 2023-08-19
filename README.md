@@ -18,6 +18,8 @@ The SteamOS release info is saved to `.last_steamos_release`.
 
 Once installed, it will check for SteamOS updates every time desktop mode is launched.
 
+If you need to debug or change the list of packages to install, run `sudo install_pacman_packages.sh` to skip the SteamOS update checks and directly install everything listed in `packages-to-install`
+
 #### Disclaimer:
 Use at your own risk. It works for me, but your mileage may vary.
 
