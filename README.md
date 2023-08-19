@@ -8,6 +8,12 @@ If the update is successful, it then runs `post_update.sh`. Add any commands you
 
 If the update fails, it opens a log file that contains the output of the `pacman -Sy --noconfirm --overwrite '*' ${PACKAGES}` command it tried to run, so you can hopefully debug.
 
+Uses [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html) to prompt for permissions to do the update
+Uses [notify-send](https://man.archlinux.org/man/notify-send.1.en) to prompt for confirmation to do the update / report success / show the log on failure
+
+update log is saved to `last_update.log`
+SteamOS release info is saved to `.last_steamos_release`
+
 ### Installation:
 
 1. clone this repo
@@ -19,4 +25,6 @@ If the update fails, it opens a log file that contains the output of the `pacman
 
 Use at your own risk. It works for me, but no promises! have fun!
 
-Thank you to @muzzol for https://gist.github.com/muzzol/f01fa6a3134d2ec90d3eb3e241bf541b, on which `install_pacman_packages.sh` is based
+#### Shout out
+
+Thank you to @muzzol for https://gist.github.com/muzzol/f01fa6a3134d2ec90d3eb3e241bf541b, from which `install_pacman_packages.sh` was forked
