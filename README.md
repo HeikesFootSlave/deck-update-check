@@ -8,10 +8,14 @@ If the update is successful, it then runs `post_update.sh`. Add any commands you
 
 If the update fails, it opens a log file that contains the output of the `pacman -Sy --noconfirm --overwrite '*' ${PACKAGES}` command it tried to run, so you can hopefully debug.
 
+
 Uses [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html) to prompt for permissions to do the update
+
 Uses [notify-send](https://man.archlinux.org/man/notify-send.1.en) to prompt for confirmation to do the update / report success / show the log on failure
 
+
 the update log is saved to `last_update.log`.
+
 the SteamOS release info is saved to `.last_steamos_release`.
 
 ### Installation:
