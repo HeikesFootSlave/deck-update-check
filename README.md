@@ -1,9 +1,9 @@
 ## deck-update-check
 When you launch Desktop Mode, this script checks to see if a SteamOS update has happened, and if so, offers (using a system notification modal from [notify-send](https://man.archlinux.org/man/notify-send.1.en)) to re-install previously specified pacman packages. (listed in the file `packages-to-install`)
 
-If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install.
+If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install (`install_pacman_packages.sh`).
 
-If the re-install is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run (if not already present).
+If the re-install is successful, it runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run (if not already present).
 
 If the re-install fails, it offers to open a log file that contains the output from `install_pacman_packages.sh`, so you can (hopefully) debug.
 
@@ -23,7 +23,7 @@ If you need to debug or change the list of packages, run `sudo install_pacman_pa
 #### Disclaimer:
 Use at your own risk. It works for me, but your mileage may vary.
 
-Good luck, Have fun!
+Good luck, have fun!
 
 #### Shout out:
 Thank you to [@muzzol](https://github.com/muzzol) for posting https://gist.github.com/muzzol/f01fa6a3134d2ec90d3eb3e241bf541b, from which `install_pacman_packages.sh` was forked! 
