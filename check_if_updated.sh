@@ -15,7 +15,7 @@ if [[ "${PREVIOUS_OS_RELEASE}" = "${CURRENT_OS_RELEASE}" ]]; then
 else
     echo "release ids changed. Prompting for permission to update...";
 
-    NOTIFY_PROMPT=$(notify-send -t 60000 -u 'critical' -i 'update-high' -a 'System Update' --action=CONFIRM='Ok!' --action=DENY='No.' 'It looks like a SteamOS Update happened. Do you want to update installed pacman packages?');
+    NOTIFY_PROMPT=$(notify-send -t 60000 -u 'critical' -i 'update-high' -a 'System Update' --action=CONFIRM='Ok!' --action=DENY='No.' 'It looks like a SteamOS Update happened. Do you want to re-install pacman packages?');
     if [[ ${NOTIFY_PROMPT} == "CONFIRM" ]]; then
 
     	# make kdesu use sudo instead of su so we dont have to set a pw for root
@@ -40,13 +40,14 @@ else
 		# add an entry to ~/.config/autostart to run when KDE starts, if not already present
 		if [[ ! -f "/home/${DECK_USER}/.config/autostart/check_if_updated.sh.desktop" ]]; then
     		echo "installing autostart entry...";
+    		touch "/home/${DECK_USER}/.config/autostart/check_if_updated.sh.desktop";
     		{
 				echo '[Desktop Entry]';
 				echo 'Comment[en_US]=';
 				echo 'Comment=';
 				echo "Exec=${INSTALL_DIR}/check_if_updated.sh";
-				echo 'GenericName[en_US]=Update pacman packages when a new SteamOS release is detected';
-				echo 'GenericName=Update pacman packages when a new SteamOS release is detected';
+				echo 'GenericName[en_US]=Re-install pacman packages when a new SteamOS release is detected';
+				echo 'GenericName=Re-install pacman packages when a new SteamOS release is detected';
 				echo 'Icon=update-none';
 				echo 'MimeType=';
 				echo 'Name[en_US]=pacman update';

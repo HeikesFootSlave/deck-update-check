@@ -1,11 +1,11 @@
 ## deck-update-check
-This script checks to see if a SteamOS update has happened, and if so, it offers (using a system notification modal from [notify-send](https://man.archlinux.org/man/notify-send.1.en)) to re-install previously specified pacman packages. (listed in the file `packages-to-install`)
+When you launch Desktop Mode, this script checks to see if a SteamOS update has happened, and if so, offers (using a system notification modal from [notify-send](https://man.archlinux.org/man/notify-send.1.en)) to re-install previously specified pacman packages. (listed in the file `packages-to-install`)
 
 If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install.
 
 If the re-install is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run (if not already present).
 
-If the re-install fails, it offers to open a log file that contains the output of `install_pacman_packages.sh`, so you can (hopefully) debug.
+If the re-install fails, it offers to open a log file that contains the output from `install_pacman_packages.sh`, so you can (hopefully) debug.
 
 The output from `install_pacman_packages.sh` is saved to `last_update.log`.
 The SteamOS release info is saved to `.last_steamos_release`.
@@ -18,7 +18,7 @@ The SteamOS release info is saved to `.last_steamos_release`.
 
 Once installed, it will check for SteamOS updates every time desktop mode is launched.
 
-If you need to debug or change the list of packages to install, run `sudo install_pacman_packages.sh` to skip the SteamOS update checks and directly install everything listed in `packages-to-install`
+If you need to debug or change the list of packages, run `sudo install_pacman_packages.sh` to skip the SteamOS update checks and directly install everything listed in `packages-to-install`
 
 #### Disclaimer:
 Use at your own risk. It works for me, but your mileage may vary.
