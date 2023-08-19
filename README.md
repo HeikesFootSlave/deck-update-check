@@ -1,29 +1,26 @@
 ## deck-update-check
+This script checks to see if a SteamOS update has happened (by looking at `/etc/os-release`), and if so, offers to update pacman packages with a system notification modal (using [notify-send](https://man.archlinux.org/man/notify-send.1.en)).
 
-This script checks to see if a SteamOS update has happened (by looking at `/etc/os-release`), and if so, offers to update pacman packages. (on first run, it will assume an update has happened, and offer to update)
+If accepted, It then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), then attempts the update.
 
-It then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), then attempts the update.
-
-If the update is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever)
+If the update is successful, it then runs `post_update.sh`. Add any commands you want to this file. (start docker containers, conky, whatever). This file is created on first run.
 
 If the update fails, it offers to open a log file that contains the output of the `pacman -Sy --noconfirm --overwrite '*' ${PACKAGES}` command it tried to run, so you can hopefully debug.
 
-Uses [notify-send](https://man.archlinux.org/man/notify-send.1.en) to prompt for confirmation to do the update, report success or failure, and ask if you want to see the log.
+the update log is saved to `./last_update.log`.
 
-the update log is saved to `last_update.log`.
-
-the SteamOS release info is saved to `.last_steamos_release`.
+the SteamOS release info is saved to `./.last_steamos_release`.
 
 ### Installation:
-1. clone this repo.
-2. add the packages you want installed to `./packages-to-install`. (if you dont, this file will be created on first run, and poplulated with 'x11vnc conky')
-3. run `check_if_updated.sh` to verify functionality
-4. add any post-update commands you want to `post_update.sh`. (created on first run of `./check_if_updated.sh`, if not already present)
-5. Add `check_if_updated.sh` to autostart in KDE. (open start menu, type 'autostart', click +add, browse to wherever you cloned this repo, click `check_if_updated.sh`)
+1. clone this repo. (somewhere in /home/deck, or elsewhere that won't get overwritten by SteamOS updates)
+2. add the package names you want to be installed to `./packages-to-install`. (if you dont, this file will be created on first run, and populated with 'x11vnc conky')
+3. execute `./check_if_updated.sh` to add an entry for the script to KDE's autostart, install/update packages, and create `./post_update.sh`.
+4. update `./post_update.sh` to include any additional commands you want run after the update happens.
 
+once installed, it will check for SteamOS updates every time desktop mode is launched.
 
 #### Disclaimer:
-Use at your own risk. It works for me, but your milage may vary.
+Use at your own risk. It works for me, but your mileage may vary.
 
 Good luck, Have fun!
 
