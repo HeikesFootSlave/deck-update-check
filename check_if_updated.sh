@@ -8,6 +8,8 @@ if [[ ! -f "${INSTALL_DIR}/.last_steamos_release" ]]; then
 	echo "${INSTALL_DIR}/.last_steamos_release does not exist, assuming update required...";
 fi
 
+PREVIOUS_OS_RELEASE_LOG_CREATE_DATE=$(stat -c %y "${INSTALL_DIR}/.last_steamos_release")
+
 PREVIOUS_OS_RELEASE=$(cat "${INSTALL_DIR}"/.last_steamos_release);
 CURRENT_OS_RELEASE=$(grep "ID" /etc/os-release);
 
@@ -17,7 +19,8 @@ if [[ "${PREVIOUS_OS_RELEASE}" = "${CURRENT_OS_RELEASE}" ]]; then
     echo "release ids unchanged, assuming no update. exiting.";
     exit 0;
 else
-    echo "release ids changed. Prompting for permission to update...";
+    echo "release ids changed sometime since ${PREVIOUS_OS_RELEASE_LOG_CREATE_DATE}.";
+    echo "Prompting for permission to update...";
 
     NOTIFY_PROMPT=$(notify-send -t 60000 -u 'critical' -i 'update-high' -a 'System Update' --action=CONFIRM='Ok!' --action=DENY='No.' 'It looks like a SteamOS Update happened. Do you want to re-install pacman packages?');
     if [[ ${NOTIFY_PROMPT} == "CONFIRM" ]]; then
