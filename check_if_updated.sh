@@ -23,10 +23,10 @@ else
     if [[ ${NOTIFY_PROMPT} == "CONFIRM" ]]; then
 
     	# make kdesu use sudo instead of su so we dont have to set a pw for root
-    	if [[ ! -f "/home/deck/.config/kdesurc" ]]; then
+    	if [[ ! -f "/home/${DECK_USER}/.config/kdesurc" ]]; then
     		echo "Creating /home/deck/.config/kdesurc...";
-    		echo "[super-user-command]" > /home/deck/.config/kdesurc;
-    		echo "super-user-command=sudo" >> /home/deck/.config/kdesurc;
+    		echo "[super-user-command]" > /home/${DECK_USER}/.config/kdesurc;
+    		echo "super-user-command=sudo" >> /home/${DECK_USER}/.config/kdesurc;
 		fi;
 
 		# create post_update.sh if it doesn't aready exist
