@@ -28,8 +28,8 @@ else
     	# make kdesu use sudo instead of su so we dont have to set a pw for root
     	if [[ ! -f "/home/${DECK_USER}/.config/kdesurc" ]]; then
     		echo "Creating /home/deck/.config/kdesurc...";
-    		echo "[super-user-command]" > /home/${DECK_USER}/.config/kdesurc;
-    		echo "super-user-command=sudo" >> /home/${DECK_USER}/.config/kdesurc;
+    		echo "[super-user-command]" > "/home/${DECK_USER}/.config/kdesurc";
+    		echo "super-user-command=sudo" >> "/home/${DECK_USER}/.config/kdesurc";
 		fi;
 
 		# create post_update.sh if it doesn't aready exist
@@ -71,13 +71,13 @@ else
 				echo 'X-DBUS-StartupType=';
 				echo 'X-KDE-SubstituteUID=false';
 				echo 'X-KDE-Username=';
-			} >> /home/${DECK_USER}/.config/autostart/check_if_updated.sh.desktop
+			} >> "/home/${DECK_USER}/.config/autostart/check_if_updated.sh.desktop"
 		fi;
 
 		echo "Running pacman update...";
         
         # run the script that actually does the update
-		if kdesu -t -i 'update-high' "${INSTALL_DIR}/install_pacman_packages.sh" > ${INSTALL_DIR}/last_update.log; then
+		if kdesu -t -i 'update-high' "${INSTALL_DIR}/install_pacman_packages.sh" > "${INSTALL_DIR}/last_update.log"; then
 			echo 'pacman update succeeded!';
 		    notify-send -i emblem-success -a 'System Update' "pacman update successful!"
 
