@@ -4,6 +4,10 @@
 
 INSTALL_DIR=$(dirname "$0");
 
+if [[ ! -f "${INSTALL_DIR}/.last_steamos_release" ]]; then
+	echo "${INSTALL_DIR}/.last_steamos_release does not exist, assuming update required...";
+fi
+
 PREVIOUS_OS_RELEASE=$(cat "${INSTALL_DIR}"/.last_steamos_release);
 CURRENT_OS_RELEASE=$(grep "ID" /etc/os-release);
 
@@ -20,12 +24,14 @@ else
 
     	# make kdesu use sudo instead of su so we dont have to set a pw for root
     	if [[ ! -f "/home/deck/.config/kdesurc" ]]; then
+    		echo "Creating /home/deck/.config/kdesurc...";
     		echo "[super-user-command]" > /home/deck/.config/kdesurc;
     		echo "super-user-command=sudo" >> /home/deck/.config/kdesurc;
 		fi;
 
 		# create post_update.sh if it doesn't aready exist
     	if [[ ! -f "${INSTALL_DIR}/post_update.sh" ]]; then
+    		echo "Creating ${INSTALL_DIR}/post_update.sh...";
     		echo "#!/usr/bin/env bash" > "${INSTALL_DIR}/post_update.sh";
     		echo "echo 'running post-update script...';" >> "${INSTALL_DIR}/post_update.sh"
     		echo "#insert post-update commands here" >> "${INSTALL_DIR}/post_update.sh";
@@ -34,6 +40,7 @@ else
 
 		# populate ./packages-to-install if it doesn't exist yet
     	if [[ ! -f "${INSTALL_DIR}/packages-to-install" ]]; then
+    		echo "creating ./packages-to-install... (edit this to specify packages)";
     		echo "x11vnc conky" > "${INSTALL_DIR}/packages-to-install";
 		fi;
 
