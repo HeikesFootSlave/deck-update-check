@@ -26,7 +26,7 @@ else
 
 		# create post_update.sh if it doesn't aready exist
     	if [[ ! -f "${INSTALL_DIR}/post_update.sh" ]]; then
-    		echo "#!/bin/bash" > "${INSTALL_DIR}/post_update.sh";
+    		echo "#!/usr/bin/env bash" > "${INSTALL_DIR}/post_update.sh";
     		echo "echo 'running post-update script...';" >> "${INSTALL_DIR}/post_update.sh"
     		echo "#insert post-update commands here" >> "${INSTALL_DIR}/post_update.sh";
     		chmod +x "${INSTALL_DIR}/post_update.sh";
