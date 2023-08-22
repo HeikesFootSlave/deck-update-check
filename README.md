@@ -1,7 +1,7 @@
 ## deck-update-check
-When you launch Desktop Mode, this script checks to see if a SteamOS update has happened, and if so, offers (using [notify-send](https://man.archlinux.org/man/notify-send.1.en)) to re-install previously specified pacman packages. (listed in the file `packages-to-install`)
+When you launch Desktop Mode, this script checks to see if a SteamOS update has happened, and if so, offers to re-install previously specified pacman packages.
 
-If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install (using `install_pacman_packages.sh`).
+If accepted, it then prompts for a sudo password with [kdesu](https://api.kde.org/frameworks/kdesu/html/index.html), and then attempts the re-install.
 
 If the re-install is successful, it runs `post_update.sh`. Add any commands you want to this file. The file is created on first run (if not already present).
 
